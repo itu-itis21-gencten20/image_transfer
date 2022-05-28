@@ -20,7 +20,7 @@ import nanocamera as nano
 
 sender = imagezmq.ImageSender(connect_to='tcp://192.168.137.1:5555')
 
-camera =nano.Camera(flip=0, width=1280, height=720, fps=30)
+camera =nano.Camera(cameratype=0, flip=0, width=1280, height=720, fps=30)
 
 image_window_name = 'From Sender'
 while camera.isReady():  # press Ctrl-C to stop image sending program
