@@ -56,20 +56,16 @@ def send_camera_image():
     print(gstreamer_pipeline(flip_method=0))
     video_capture = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
     if video_capture.isOpened():
-        try:
-            while True:
+        while True:
+            try:
                 ret_val, frame = video_capture.read()
                 sender.send_image(image_window_name, frame)
-                time.sleep(1/30)
+                time.sleep(1)
                 # Check to see if the user closed the window
                 # Under GTK+ (Jetson Default), WND_PROP_VISIBLE does not work correctly. Under Qt it does
                 # GTK - Substitute WND_PROP_AUTOSIZE to detect if window has been closed by user
-                
-               
-                
-        finally:
-            video_capture.release()
-            
+            finally:
+                video_capture.release()
     else:
         print("Error: Unable to open camera")
 
