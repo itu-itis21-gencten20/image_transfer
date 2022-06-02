@@ -14,6 +14,7 @@ import cv2
 import imagezmq
 from imutils.video import VideoStream
 
+
 def gstreamer_pipeline(
     sensor_id=0,
     capture_width=1280,
@@ -56,11 +57,12 @@ def send_camera_image():
     # video_capture = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
     vs = VideoStream(src=0, resolution=(480, 720),
                      framerate=FPS).start()
+    time.sleep(3)
     while True:
         try:
             frame = vs.read()
             sender.send_image(image_window_name, frame)
-            time.sleep(1 / FPS) 
+            time.sleep(1 / FPS)
             # Check to see if the user closed the window
             # Under GTK+ (Jetson Default), WND_PROP_VISIBLE does not work correctly. Under Qt it does
             # GTK - Substitute WND_PROP_AUTOSIZE to detect if window has been closed by user
