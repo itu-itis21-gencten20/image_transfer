@@ -51,7 +51,6 @@ def send_cam_stream():
                     #reply_from = sender.send_jpg(jetson_name, jpg_buffer)
                     reply_from = sender.send_image(image_window_name, frame)
                     print(reply_from)
-                    time.sleep(.5)        
         except (KeyboardInterrupt):
             pass                            # Ctrl-C was pressed to end program
         except Exception as ex:
