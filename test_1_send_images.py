@@ -54,8 +54,7 @@ def send_camera_image():
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     # print(gstreamer_pipeline(flip_method=0))
     # video_capture = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
-    vs = VideoStream(usePiCamera=True,
-                     resolution=(480, 720),
+    vs = VideoStream(src=0, resolution=(480, 720),
                      framerate=FPS).start()
     while True:
         try:
