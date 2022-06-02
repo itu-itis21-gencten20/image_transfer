@@ -29,6 +29,7 @@ while camera.isReady():  # press Ctrl-C to stop image sending program
         sender.send_image(image_window_name, image)
         time.sleep(0.1)
     except KeyboardInterrupt:
+        print("Error")
         break
 
 
