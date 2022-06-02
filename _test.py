@@ -4,11 +4,11 @@ import time
 
 def gstreamer_pipeline(
     sensor_id=0,
-    capture_width=1280,
-    capture_height=720,
+    capture_width=3264,
+    capture_height=2464,
     display_width=960,
     display_height=540,
-    framerate=30,
+    framerate=21,
     flip_method=0,
 ):
     return (
