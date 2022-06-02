@@ -35,3 +35,4 @@ while camera.isReady():  # press Ctrl-C to stop image sending program
 
 camera.release()
 del camera
+
