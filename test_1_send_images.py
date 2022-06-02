@@ -42,35 +42,32 @@ def gstreamer_pipeline(
     )
 
 
-
 # Create 2 different test images to send
 # A green square on a black background
 # A red square on a black background
 
 
-
 def send_camera_image():
+    FPS = 15
     image_window_name = 'From Sender'
     sender = imagezmq.ImageSender(connect_to='tcp://192.168.137.1:5555')
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
-    print(gstreamer_pipeline(flip_method=0))
-    video_capture = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
-    if video_capture.isOpened():
-        while True:
-            try:
-                ret_val, frame = video_capture.read()
-                sender.send_image(image_window_name, frame)
-                time.sleep(1)
-                # Check to see if the user closed the window
-                # Under GTK+ (Jetson Default), WND_PROP_VISIBLE does not work correctly. Under Qt it does
-                # GTK - Substitute WND_PROP_AUTOSIZE to detect if window has been closed by user
-            finally:
-                video_capture.release()
-    else:
-        print("Error: Unable to open camera")
+    # print(gstreamer_pipeline(flip_method=0))
+    # video_capture = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
+    vs = VideoStream(usePiCamera=True,
+                     resolution=(480, 720),
+                     framerate=FPS).start()
+    while True:
+        try:
+            frame = vs.read()
+            sender.send_image(image_window_name, frame)
+            time.sleep(1 / FPS) 
+            # Check to see if the user closed the window
+            # Under GTK+ (Jetson Default), WND_PROP_VISIBLE does not work correctly. Under Qt it does
+            # GTK - Substitute WND_PROP_AUTOSIZE to detect if window has been closed by user
+        finally:
+            video_capture.release()
 
 
 if __name__ == '__main__':
     send_camera_image()
-
-        
