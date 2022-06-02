@@ -66,6 +66,7 @@ def send_camera_image():
             # GTK - Substitute WND_PROP_AUTOSIZE to detect if window has been closed by user
         except Exception as e:
             print(e)
+            break
 
 
 if __name__ == '__main__':
