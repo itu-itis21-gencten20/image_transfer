@@ -45,6 +45,7 @@ def send_cam_stream():
             with imagezmq.ImageSender(connect_to='tcp://192.168.137.1:5555') as sender:
                 while True:                 # send images as a stream until Ctrl-C
                     ret_val, frame = video_capture.read()
+                    print('ret_val is:', ret_val)
                     jpg_buffer = encode_jpeg(frame, quality=90, colorspace='BGR')
                     reply_from = sender.send_jpg(jetson_name, jpg_buffer)
                     print(reply_from)
