@@ -1,6 +1,7 @@
 import cv2
 import time
 import imagezmq
+import traceback
 from simplejpeg import encode_jpeg
 
 def gstreamer_pipeline(
