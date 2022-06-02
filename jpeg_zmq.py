@@ -11,7 +11,7 @@ def gstreamer_pipeline(
     capture_height=480,
     display_width=720,
     display_height=480,
-    framerate=30,
+    framerate=60,
     flip_method=0,
 ):
     return (
@@ -51,7 +51,6 @@ def send_cam_stream():
                     #reply_from = sender.send_jpg(jetson_name, jpg_buffer)
                     reply_from = sender.send_image(image_window_name, frame)
                     print(reply_from)
-                    time.sleep(1/15)
         except (KeyboardInterrupt):
             pass                            # Ctrl-C was pressed to end program
         except Exception as ex:
