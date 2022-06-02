@@ -3,21 +3,11 @@ import base64
 import time
 
 def gstreamer_pipeline(
-    sensor_id=0,
-    capture_width=3264,
-    capture_height=2464,
-    display_width=960,
-    display_height=540,
-    framerate=21,
-    flip_method=0,
+   
 ):
     return (
-        "nvarguscamerasrc sensor-id=%d !"
-        "video/x-raw(memory:NVMM), width=(int)%d, height=(int)%d, framerate=(fraction)%d/1 ! "
-        "nvvidconv flip-method=%d ! "
-        "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
-        "videoconvert ! "
-        "video/x-raw, format=(string)BGR ! appsink"
+        "v4l2src device=/dev/video0 ! image/jpeg ! jpegparse ! nvv4l2decoder mjpeg=1 ! nvvidconv ! video/x-raw, format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink"
+        """
         % (
             sensor_id,
             capture_width,
@@ -27,6 +17,7 @@ def gstreamer_pipeline(
             display_width,
             display_height,
         )
+        """
     )
 
 
