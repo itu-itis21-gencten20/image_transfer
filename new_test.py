@@ -13,7 +13,7 @@ while True:
     try:
         grabbed, frame = camera.read()  # grab the current frame
         #print(grabbed, frame)
-        frame = cv2.resize(frame, (1280, 720))  # resize the frame
+        frame = cv2.resize(frame, dsize=(1280, 720))  # resize the frame
         encoded, buffer = cv2.imencode('.jpg', frame)
         #cv2.imshow('abc', )
         jpg_as_text = base64.b64encode(buffer)
