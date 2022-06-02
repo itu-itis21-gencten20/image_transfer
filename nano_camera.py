@@ -9,7 +9,7 @@ def send_cam_stream():
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
     jetson_name = socket.gethostname()
     image_window_name = 'From Sender'
-    camera = nano.Camera(device_id=0, camera_type = 0, flip=0, width=640, height=480, fps=30)
+    camera = nano.Camera(device_id=0, camera_type = 0, flip=0, width=720, height=480, fps=30)
     time.sleep(3)
     print('CSI Camera ready? - ', camera.isReady())
     if camera.isReady():
