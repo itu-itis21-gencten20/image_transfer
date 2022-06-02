@@ -6,6 +6,38 @@ import socket
 from simplejpeg import encode_jpeg
 
 
+def gstreamer_pipeline(
+    sensor_id=0,
+    capture_width=1280,
+    capture_height=720,
+    display_width=480,
+    display_height=360,
+    framerate=60,
+    flip_method=0,
+):
+#     return '''nvarguscamerasrc sensor_id=1 ! 
+#    'video/x-raw(memory:NVMM),width=3264, height=2464, framerate=21/1, format=NV12' ! 
+#    nvvidconv flip-method=0 ! 'video/x-raw, width=816, height=616' ! 
+#    nvvidconv ! nvegltransform ! nveglglessink -e'''
+    return (
+        "nvarguscamerasrc sensor-id=%d !"
+        "video/x-raw(memory:NVMM), width=(int)%d, height=(int)%d, framerate=(fraction)%d/1 ! "
+        "nvvidconv flip-method=%d ! "
+        "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
+        "videoconvert ! "
+        "video/x-raw, format=(string)BGR ! appsink"
+        % (
+            sensor_id,
+            capture_width,
+            capture_height,
+            framerate,
+            flip_method,
+            display_width,
+            display_height,
+        )
+    )
+
+
 def send_cam_stream():
 
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
