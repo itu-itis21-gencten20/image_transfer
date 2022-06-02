@@ -1,6 +1,8 @@
 import cv2
 import base64
 import time
+import imagezmq
+import simplejpeg
 
 def gstreamer_pipeline(
     sensor_id=0,
@@ -42,9 +44,9 @@ def show_camera():
                 return_key, encoded_image = cv2.imencode('.jpg', frame)
                 if not return_key:
                     continue
-                jpg_as_text = base64.b64encode(encoded_image)
-                jpg_as_text = base64.b64decode(jpg_as_text)
-                print(jpg_as_text)
+                jpg_as_text = simplejpeg.encode_jpeg(frame, quality = 90, colorspace='BGR')
+                reply_from = sender.send_jpg(rpi_name, jpg_buffer)
+                print(reply_from)
                 time.sleep(.5)
 
                 keyCode = cv2.waitKey(10) & 0xFF
