@@ -43,6 +43,7 @@ def show_camera():
                 if not return_key:
                     continue
                 jpg_as_text = base64.b64encode(encoded_image)
+                jpg_as_text = base64.b64decode(jpg_as_text)
                 print(jpg_as_text)
                 time.sleep(.5)
 
