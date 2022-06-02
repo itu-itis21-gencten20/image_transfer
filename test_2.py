@@ -31,5 +31,6 @@ while camera.isReady():  # press Ctrl-C to stop image sending program
     except KeyboardInterrupt:
         break
 
-    camera.release()
-    del camera
+
+camera.release()
+del camera
