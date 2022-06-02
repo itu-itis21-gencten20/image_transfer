@@ -13,7 +13,7 @@ def gstreamer_pipeline(
     # display_width=720,
     # display_height=480,
     # framerate=60,
-    # flip_method=0,
+    flip_method=0,
 ):
     return '''nvarguscamerasrc sensor_id=1 ! 
    'video/x-raw(memory:NVMM),width=3264, height=2464, framerate=21/1, format=NV12' ! 
