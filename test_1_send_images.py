@@ -12,7 +12,7 @@ import time
 import numpy as np
 import cv2
 import imagezmq
-
+from imutils.video import VideoStream
 
 def gstreamer_pipeline(
     sensor_id=0,
