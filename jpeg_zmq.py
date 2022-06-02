@@ -7,10 +7,10 @@ from simplejpeg import encode_jpeg
 
 def gstreamer_pipeline(
     sensor_id=0,
-    capture_width=1280,
-    capture_height=720,
-    display_width=960,
-    display_height=540,
+    capture_width=720,
+    capture_height=480,
+    display_width=720,
+    display_height=480,
     framerate=30,
     flip_method=0,
 ):
@@ -51,6 +51,7 @@ def send_cam_stream():
                     #reply_from = sender.send_jpg(jetson_name, jpg_buffer)
                     reply_from = sender.send_image(image_window_name, frame)
                     print(reply_from)
+                    time.sleep(1/15)
         except (KeyboardInterrupt):
             pass                            # Ctrl-C was pressed to end program
         except Exception as ex:
