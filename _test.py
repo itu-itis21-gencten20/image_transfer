@@ -39,7 +39,7 @@ def show_camera():
         try:
             while True:
                 ret_val, frame = video_capture.read()
-                return_key, encoded_image = cv2.imencode(frame)
+                return_key, encoded_image = cv2.imencode('.jpg', frame)
                 if not return_key:
                     continue
                 jpg_as_text = base64.b64encode(encoded_image)
