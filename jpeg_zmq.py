@@ -2,6 +2,7 @@ import cv2
 import time
 import imagezmq
 import traceback
+import socket
 from simplejpeg import encode_jpeg
 
 def gstreamer_pipeline(
@@ -35,6 +36,7 @@ def gstreamer_pipeline(
 def send_cam_stream():
 
     # To flip the image, modify the flip_method parameter (0 and 2 are the most common)
+    jetson_name = socket.gethostname()
     print(gstreamer_pipeline(flip_method=0))
     video_capture = cv2.VideoCapture(0)
     time.sleep(3)
@@ -44,7 +46,7 @@ def send_cam_stream():
                 while True:                 # send images as a stream until Ctrl-C
                     ret_val, frame = video_capture.read()
                     jpg_buffer = encode_jpeg(frame, quality=90, colorspace='BGR')
-                    reply_from = sender.send_jpg(rpi_name, jpg_buffer)
+                    reply_from = sender.send_jpg(jetson_name, jpg_buffer)
                     print(reply_from)
                     time.sleep(.5)        
         except (KeyboardInterrupt):
