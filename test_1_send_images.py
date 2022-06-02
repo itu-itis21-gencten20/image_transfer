@@ -61,6 +61,7 @@ def send_camera_image():
     while True:
         try:
             frame = vs.read()
+            cv2.imShow(image_window_name, frame)
             sender.send_image(image_window_name, frame)
             time.sleep(1 / FPS)
             # Check to see if the user closed the window
